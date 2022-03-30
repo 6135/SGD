@@ -29,14 +29,14 @@ def execute(params, query):
     except Exception as error:
         print(error)
         return final
-    finally:
-        if connection is not None:
-            connection.close()
+    # finally:
+    #     if connection is not None:
+    #         connection.close()
 
 
 def run_tests(n, filename):
     params = config()
-    queries_path = '../sql/queries'
+    queries_path = 'sql/queries'
     queries = natsorted(listdir(queries_path))
 
     with open(filename, 'w', newline='') as csvfile:
@@ -46,48 +46,48 @@ def run_tests(n, filename):
 
     for i in range(1, n + 1):
         # Drop Tables
-        execute(params, open('../sql/drop_tables.sql').read())
+        execute(params, open('sql/drop_tables.sql').read())
         print('Dropped all tables...')
 
         # Create Tables
-        execute(params, open('../sql/create_tables.sql').read())
+        execute(params, open('sql/create_tables.sql').read())
         print('Created tables...')
 
         # Load Data (without keys)
-        delta = execute(params, open('../sql/load.sql', 'r').read())
+        delta = execute(params, open('sql/load.sql', 'r').read())
         with open(filename, 'a', newline='') as csvfile:
             csvwriter = csv.writer(csvfile)
             csvwriter.writerow([i, 'load.sql', False, delta])
         print('Loaded data (without keys)...')
 
         # Search (without keys)
-        for query in queries:
-            delta = execute(params, open(
-                queries_path + '/' + query, 'r').read())
+        # for query in queries:
+        #     delta = execute(params, open(
+        #         queries_path + '/' + query, 'r').read())
 
-            with open(filename, 'a', newline='') as csvfile:
-                csvwriter = csv.writer(csvfile)
-                csvwriter.writerow([i, query, False, delta])
+        #     with open(filename, 'a', newline='') as csvfile:
+        #         csvwriter = csv.writer(csvfile)
+        #         csvwriter.writerow([i, query, False, delta])
 
-            print(f'Executed query {query} (without keys)...')
+        #     print(f'Executed query {query} (without keys)...')
 
         # Create Keys
-        delta = execute(params, open('../sql/create_keys.sql', 'r').read())
-        with open(filename, 'a', newline='') as csvfile:
-            csvwriter = csv.writer(csvfile)
-            csvwriter.writerow([i, 'create_keys.sql', True, delta])
-        print('Created keys...')
+        # delta = execute(params, open('../sql/create_keys.sql', 'r').read())
+        # with open(filename, 'a', newline='') as csvfile:
+        #     csvwriter = csv.writer(csvfile)
+        #     csvwriter.writerow([i, 'create_keys.sql', True, delta])
+        # print('Created keys...')
 
         # Search (with keys)
-        for query in queries:
-            delta = execute(params, open(
-                queries_path + '/' + query, 'r').read())
+        # for query in queries:
+        #     delta = execute(params, open(
+        #         queries_path + '/' + query, 'r').read())
 
-            with open(filename, 'a', newline='') as csvfile:
-                csvwriter = csv.writer(csvfile)
-                csvwriter.writerow([i, query, True, delta])
+        #     with open(filename, 'a', newline='') as csvfile:
+        #         csvwriter = csv.writer(csvfile)
+        #         csvwriter.writerow([i, query, True, delta])
 
-            print(f'Executed query {query} (with keys)...')
+        #     print(f'Executed query {query} (with keys)...')
 
 
 def main():
