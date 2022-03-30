@@ -1,5 +1,5 @@
-# modified
-select
+BEGIN
+EXECUTE IMMEDIATE 'select
 	c_count,
 	count(*) as custdist
 from
@@ -10,7 +10,7 @@ from
 		from
 			customer left outer join orders on
 				c_custkey = o_custkey
-				and o_comment not like '%special%requests%'
+				and o_comment not like ''%special%requests%''
 		group by
 			c_custkey
 	) as c_orders
@@ -18,4 +18,5 @@ group by
 	c_count
 order by
 	custdist desc,
-	c_count desc;
+	c_count desc';
+END;

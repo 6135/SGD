@@ -1,17 +1,17 @@
-create view revenue0 (supplier_no, total_revenue) as
+BEGIN
+EXECUTE IMMEDIATE 'create view revenue0 (supplier_no, total_revenue) as
 	select
 		l_suppkey,
 		sum(l_extendedprice * (1 - l_discount))
 	from
 		lineitem
 	where
-		l_shipdate >= date '1996-01-01'
-		and l_shipdate < date '1996-01-01' + interval '3' month
+		l_shipdate >= date ''1996-01-01''
+		and l_shipdate < date ''1996-01-01'' + interval ''3'' month
 	group by
-		l_suppkey;
- 
- 
-select
+		l_suppkey';
+		
+EXECUTE IMMEDIATE 'select
 	s_suppkey,
 	s_name,
 	s_address,
@@ -31,4 +31,5 @@ where
 order by
 	s_suppkey;
  
-drop view revenue0;
+drop view revenue0';
+END;

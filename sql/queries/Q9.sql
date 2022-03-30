@@ -1,4 +1,5 @@
-select
+BEGIN
+EXECUTE IMMEDIATE 'select
 	nation,
 	o_year,
 	sum(amount) as sum_profit
@@ -22,12 +23,12 @@ from
 			and p_partkey = l_partkey
 			and o_orderkey = l_orderkey
 			and s_nationkey = n_nationkey
-			and p_name like '%green%'
+			and p_name like ''%green%''
 	) as profit
 group by
 	nation,
 	o_year
 order by
 	nation,
-	o_year desc;
- 
+	o_year desc';
+END;

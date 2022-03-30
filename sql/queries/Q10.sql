@@ -1,4 +1,5 @@
-select
+BEGIN
+EXECUTE IMMEDIATE 'select
 	c_custkey,
 	c_name,
 	sum(l_extendedprice * (1 - l_discount)) as revenue,
@@ -15,9 +16,9 @@ from
 where
 	c_custkey = o_custkey
 	and l_orderkey = o_orderkey
-	and o_orderdate >= date '1993-10-01'
-	and o_orderdate < date '1993-10-01' + interval '3' month
-	and l_returnflag = 'R'
+	and o_orderdate >= date ''1993-10-01''
+	and o_orderdate < date ''1993-10-01'' + interval ''3'' month
+	and l_returnflag = ''R''
 	and c_nationkey = n_nationkey
 group by
 	c_custkey,
@@ -29,4 +30,5 @@ group by
 	c_comment
 order by
 	revenue desc
-limit 20;
+limit 20';
+END;

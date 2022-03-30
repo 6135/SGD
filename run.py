@@ -4,6 +4,7 @@
 
 from ast import arg
 import csv
+import threading
 import cx_Oracle
 import sys
 from time import time
@@ -15,23 +16,24 @@ from natsort import natsorted
 def execute(params, query):
     initial = 0
     final = 0
+    print(query)
     try:
+        
         with cx_Oracle.connect(**params) as connection:
+            t = threading.Timer(3600 * 4,connection.cancel)
             with connection.cursor() as cursor:
                 initial = time()
+                t.start()
                 cursor.execute(query)
                 final = time() - initial
+
         return final
-    # except psycopg2.extensions.QueryCanceledError:
-    #     final = time() - initial
-    #     print("Query timeout...")
-    #     return final
+
     except Exception as error:
         print(error)
         return final
-    # finally:
-    #     if connection is not None:
-    #         connection.close()
+    finally:
+        t.cancel()
 
 
 def run_tests(n, filename):
@@ -91,10 +93,13 @@ def run_tests(n, filename):
 
 
 def main():
-    if len(sys.argv) == 3:
-        run_tests(int(sys.argv[1]), sys.argv[2])
-    else:
-        print(f'Usage: {sys.argv[0]} N FILENAME')
+    
+    execute(config(), open('sql/create_tables.sql').read())
+    # execute(config(),open('sql/queries/Q1.sql', 'r').read())
+    # if len(sys.argv) == 3:
+    #     run_tests(int(sys.argv[1]), sys.argv[2])
+    # else:
+    #     print(f'Usage: {sys.argv[0]} N FILENAME')
 
 
 if __name__ == '__main__':

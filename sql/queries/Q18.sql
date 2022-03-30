@@ -1,4 +1,5 @@
-select
+BEGIN
+EXECUTE IMMEDIATE 'select
 	c_name,
 	c_custkey,
 	o_orderkey,
@@ -30,4 +31,5 @@ group by
 order by
 	o_totalprice desc,
 	o_orderdate
-limit 100;
+limit 100';
+END;

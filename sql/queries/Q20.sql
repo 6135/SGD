@@ -1,4 +1,5 @@
-select
+BEGIN
+EXECUTE IMMEDIATE 'select
 	s_name,
 	s_address
 from
@@ -17,7 +18,7 @@ where
 				from
 					part
 				where
-					p_name like 'forest%'
+					p_name like ''forest%''
 			)
 			and ps_availqty > (
 				select
@@ -27,11 +28,12 @@ where
 				where
 					l_partkey = ps_partkey
 					and l_suppkey = ps_suppkey
-					and l_shipdate >= date '1994-01-01'
-					and l_shipdate < date '1994-01-01' + interval '1' year
+					and l_shipdate >= date ''1994-01-01''
+					and l_shipdate < date ''1994-01-01'' + interval ''1'' year
 			)
 	)
 	and s_nationkey = n_nationkey
-	and n_name = 'CANADA'
+	and n_name = ''CANADA''
 order by
-	s_name;
+	s_name';
+END;

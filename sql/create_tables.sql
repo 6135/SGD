@@ -4,7 +4,7 @@
 -- GRANT CREATE SESSION,
 --       CREATE TABLE,
 --       UNLIMITED TABLESPACE
---     TO c##pch;
+--     TO c##tpch;
 
 -- CREATE OR REPLACE DIRECTORY tpch_dir AS 'C:\Users\Public\data\';
 
