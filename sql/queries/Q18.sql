@@ -1,5 +1,4 @@
-BEGIN
-EXECUTE IMMEDIATE 'select
+select
 	c_name,
 	c_custkey,
 	o_orderkey,
@@ -31,5 +30,4 @@ group by
 order by
 	o_totalprice desc,
 	o_orderdate
-FETCH NEXT 100 ROWS ONLY';
-END;
+FETCH NEXT 100 ROWS ONLY
