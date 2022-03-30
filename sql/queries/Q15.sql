@@ -29,7 +29,7 @@ where
 			revenue0
 	)
 order by
-	s_suppkey;
- 
-drop view revenue0';
+	s_suppkey';
+    
+EXECUTE IMMEDIATE 'drop view revenue0';
 END;

@@ -30,5 +30,5 @@ group by
 	c_comment
 order by
 	revenue desc
-limit 20';
+FETCH NEXT 20 ROWS ONLY';
 END;

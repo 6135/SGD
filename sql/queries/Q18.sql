@@ -31,5 +31,5 @@ group by
 order by
 	o_totalprice desc,
 	o_orderdate
-limit 100';
+FETCH NEXT 100 ROWS ONLY';
 END;

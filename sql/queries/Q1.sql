@@ -1,6 +1,4 @@
-BEGING
-
-EXECUTE IMMEDIATE 'select
+select
 	l_returnflag,
 	l_linestatus,
 	sum(l_quantity) as sum_qty,
@@ -14,11 +12,10 @@ EXECUTE IMMEDIATE 'select
 from
 	lineitem
 where
-	l_shipdate <= date ''1998-12-01'' - interval ''90'' day
+	to_date(l_shipdate,'yyyy-mm-dd') <= to_date('1998-12-01','yyyy-mm-dd') - interval '90' day (3)
 group by
 	l_returnflag,
 	l_linestatus
 order by
 	l_returnflag,
-	l_linestatus';
-END;
+	l_linestatus

@@ -13,7 +13,7 @@ from
 				and o_comment not like ''%special%requests%''
 		group by
 			c_custkey
-	) as c_orders
+	)
 group by
 	c_count
 order by

@@ -1,5 +1,4 @@
-BEGIN
-EXECUTE IMMEDIATE 'select
+select
 	n_name,
 	sum(l_extendedprice * (1 - l_discount)) as revenue
 from
@@ -16,11 +15,10 @@ where
 	and c_nationkey = s_nationkey
 	and s_nationkey = n_nationkey
 	and n_regionkey = r_regionkey
-	and r_name = ''ASIA''
-	and o_orderdate >= date ''1994-01-01''
-	and o_orderdate < date ''1994-01-01'' + interval ''1'' year
+	and r_name = 'ASIA'
+	and to_date(o_orderdate,'yyyy-mm-dd') >= to_date('1994-01-01','yyyy-mm-dd')
+	and to_date(o_orderdate,'yyyy-mm-dd') < to_date('1994-01-01','yyyy-mm-dd') + interval '1' year
 group by
 	n_name
 order by
-	revenue desc';
-END;
+	revenue desc

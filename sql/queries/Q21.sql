@@ -38,5 +38,5 @@ group by
 order by
 	numwait desc,
 	s_name
-limit 100';
+FETCH NEXT 100 ROWS ONLY';
 END;

@@ -1,100 +1,107 @@
-
--- CREATE USER c##tpch IDENTIFIED BY tpch;
-
--- GRANT CREATE SESSION,
---       CREATE TABLE,
---       UNLIMITED TABLESPACE
---     TO c##tpch;
-
--- CREATE OR REPLACE DIRECTORY tpch_dir AS 'C:\Users\Public\data\';
-
--- GRANT READ ON DIRECTORY tpch_dir TO c##tpch;
--- GRANT WRITE ON DIRECTORY tpch_dir TO c##tpch;
-
 BEGIN
-EXECUTE IMMEDIATE 'CREATE TABLE NATION (
-    N_NATIONKEY INTEGER NOT NULL,
-    N_NAME CHAR(25) NOT NULL,
-    N_REGIONKEY INTEGER NOT NULL,
-    N_COMMENT VARCHAR(152)
-)';
 
-EXECUTE IMMEDIATE 'CREATE TABLE REGION (
-    R_REGIONKEY INTEGER NOT NULL,
-    R_NAME CHAR(25) NOT NULL,
-    R_COMMENT VARCHAR(152)
-)';
+EXECUTE IMMEDIATE 'CREATE OR REPLACE DIRECTORY tpch_dir AS ''C:\Users\Public\data''';
+EXECUTE IMMEDIATE 'GRANT READ ON DIRECTORY tpch_dir TO c##tpch';
+EXECUTE IMMEDIATE 'GRANT WRITE ON DIRECTORY tpch_dir TO c##tpch';
 
-EXECUTE IMMEDIATE 'CREATE TABLE PART (
-    P_PARTKEY INTEGER NOT NULL,
-    P_NAME VARCHAR(55) NOT NULL,
-    P_MFGR CHAR(25) NOT NULL,
-    P_BRAND CHAR(10) NOT NULL,
-    P_TYPE VARCHAR(25) NOT NULL,
-    P_SIZE INTEGER NOT NULL,
-    P_CONTAINER CHAR(10) NOT NULL,
-    P_RETAILPRICE DECIMAL(15, 2) NOT NULL,
-    P_COMMENT VARCHAR(23) NOT NULL
-)';
+EXECUTE IMMEDIATE 'CREATE TABLE part
+    (
+        p_partkey       NUMBER(10, 0),
+        p_name          VARCHAR2(55),
+        p_mfgr          CHAR(25),
+        p_brand         CHAR(10),
+        p_type          VARCHAR2(25),
+        p_size          INTEGER,
+        p_container     CHAR(10),
+        p_retailprice   NUMBER,
+        p_comment       VARCHAR2(23)
+    )';
 
-EXECUTE IMMEDIATE 'CREATE TABLE SUPPLIER (
-    S_SUPPKEY INTEGER NOT NULL,
-    S_NAME CHAR(25) NOT NULL,
-    S_ADDRESS VARCHAR(40) NOT NULL,
-    S_NATIONKEY INTEGER NOT NULL,
-    S_PHONE CHAR(15) NOT NULL,
-    S_ACCTBAL DECIMAL(15, 2) NOT NULL,
-    S_COMMENT VARCHAR(101) NOT NULL
-)';
+EXECUTE IMMEDIATE    'CREATE TABLE supplier
+    (
+        s_suppkey     NUMBER(10, 0),
+        s_name        CHAR(25),
+        s_address     VARCHAR2(40),
+        s_nationkey   NUMBER(10, 0),
+        s_phone       CHAR(15),
+        s_acctbal     NUMBER,
+        s_comment     VARCHAR2(101)
+    )';
 
-EXECUTE IMMEDIATE 'CREATE TABLE PARTSUPP (
-    PS_PARTKEY INTEGER NOT NULL,
-    PS_SUPPKEY INTEGER NOT NULL,
-    PS_AVAILQTY INTEGER NOT NULL,
-    PS_SUPPLYCOST DECIMAL(15, 2) NOT NULL,
-    PS_COMMENT VARCHAR(199) NOT NULL
-)';
+EXECUTE IMMEDIATE    'CREATE TABLE partsupp
+    (
+        ps_partkey      NUMBER(10, 0),
+        ps_suppkey      NUMBER(10, 0),
+        ps_availqty     INTEGER,
+        ps_supplycost   NUMBER,
+        ps_comment      VARCHAR2(199)
+    )';
 
-EXECUTE IMMEDIATE 'CREATE TABLE CUSTOMER (
-    C_CUSTKEY INTEGER NOT NULL,
-    C_NAME VARCHAR(25) NOT NULL,
-    C_ADDRESS VARCHAR(40) NOT NULL,
-    C_NATIONKEY INTEGER NOT NULL,
-    C_PHONE CHAR(15) NOT NULL,
-    C_ACCTBAL DECIMAL(15, 2) NOT NULL,
-    C_MKTSEGMENT CHAR(10) NOT NULL,
-    C_COMMENT VARCHAR(117) NOT NULL
-)';
+EXECUTE IMMEDIATE    'CREATE TABLE customer
+    (
+        c_custkey      NUMBER(10, 0),
+        c_name         VARCHAR2(25),
+        c_address      VARCHAR2(40),
+        c_nationkey    NUMBER(10, 0),
+        c_phone        CHAR(15),
+        c_acctbal      NUMBER,
+        c_mktsegment   CHAR(10),
+        c_comment      VARCHAR2(117)
+    )';
 
-EXECUTE IMMEDIATE 'CREATE TABLE ORDERS (
-    O_ORDERKEY INTEGER NOT NULL,
-    O_CUSTKEY INTEGER NOT NULL,
-    O_ORDERSTATUS CHAR(1) NOT NULL,
-    O_TOTALPRICE DECIMAL(15, 2) NOT NULL,
-    O_ORDERDATE DATE NOT NULL,
-    O_ORDERPRIORITY CHAR(15) NOT NULL,
-    O_CLERK CHAR(15) NOT NULL,
-    O_SHIPPRIORITY INTEGER NOT NULL,
-    O_COMMENT VARCHAR(79) NOT NULL
-)';
 
-EXECUTE IMMEDIATE 'CREATE TABLE LINEITEM (
-    L_ORDERKEY INTEGER NOT NULL,
-    L_PARTKEY INTEGER NOT NULL,
-    L_SUPPKEY INTEGER NOT NULL,
-    L_LINENUMBER INTEGER NOT NULL,
-    L_QUANTITY DECIMAL(15, 2) NOT NULL,
-    L_EXTENDEDPRICE DECIMAL(15, 2) NOT NULL,
-    L_DISCOUNT DECIMAL(15, 2) NOT NULL,
-    L_TAX DECIMAL(15, 2) NOT NULL,
-    L_RETURNFLAG CHAR(1) NOT NULL,
-    L_LINESTATUS CHAR(1) NOT NULL,
-    L_SHIPDATE DATE NOT NULL,
-    L_COMMITDATE DATE NOT NULL,
-    L_RECEIPTDATE DATE NOT NULL,
-    L_SHIPINSTRUCT CHAR(25) NOT NULL,
-    L_SHIPMODE CHAR(10) NOT NULL,
-    L_COMMENT VARCHAR(44) NOT NULL
-)';
+EXECUTE IMMEDIATE    'CREATE TABLE orders
+    (
+        o_orderkey        NUMBER(10, 0),
+        o_custkey         NUMBER(10, 0),
+        o_orderstatus     CHAR(1),
+        o_totalprice      NUMBER,
+        o_orderdate       CHAR(10),
+        o_orderpriority   CHAR(15),
+        o_clerk           CHAR(15),
+        o_shippriority    INTEGER,
+        o_comment         VARCHAR2(79)
+    )';
 
+
+EXECUTE IMMEDIATE   ' CREATE TABLE lineitem
+    (
+        l_orderkey        NUMBER(10, 0),
+        l_partkey         NUMBER(10, 0),
+        l_suppkey         NUMBER(10, 0),
+        l_linenumber      INTEGER,
+        l_quantity        NUMBER,
+        l_extendedprice   NUMBER,
+        l_discount        NUMBER,
+        l_tax             NUMBER,
+        l_returnflag      CHAR(1),
+        l_linestatus      CHAR(1),
+        l_shipdate        CHAR(10),
+        l_commitdate      CHAR(10),
+        l_receiptdate     CHAR(10),
+        l_shipinstruct    CHAR(25),
+        l_shipmode        CHAR(10),
+        l_comment         VARCHAR2(44)
+    )';
+
+EXECUTE IMMEDIATE   ' CREATE TABLE nation
+    (
+        n_nationkey   NUMBER(10, 0),
+        n_name        CHAR(25),
+        n_regionkey   NUMBER(10, 0),
+        n_comment     VARCHAR(152)
+    )';
+
+
+EXECUTE IMMEDIATE   ' CREATE TABLE region
+    (
+        r_regionkey   NUMBER(10, 0),
+        r_name        CHAR(25),
+        r_comment     VARCHAR(152)
+    )';
+exception when others then
+    if SQLCODE = -955 then null; else raise; end if;
+
+ 
 END;
+
