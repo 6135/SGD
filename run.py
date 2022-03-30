@@ -4,7 +4,7 @@
 
 from ast import arg
 import csv
-import psycopg2
+import cx_Oracle
 import sys
 from time import time
 from os import listdir
@@ -16,17 +16,17 @@ def execute(params, query):
     initial = 0
     final = 0
     try:
-        with psycopg2.connect(**params) as connection:
+        with cx_Oracle.connect(**params) as connection:
             with connection.cursor() as cursor:
                 initial = time()
                 cursor.execute(query)
                 final = time() - initial
         return final
-    except psycopg2.extensions.QueryCanceledError:
-        final = time() - initial
-        print("Query timeout...")
-        return final
-    except (Exception, psycopg2.DatabaseError) as error:
+    # except psycopg2.extensions.QueryCanceledError:
+    #     final = time() - initial
+    #     print("Query timeout...")
+    #     return final
+    except Exception as error:
         print(error)
         return final
     finally:
