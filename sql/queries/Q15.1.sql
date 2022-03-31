@@ -5,7 +5,7 @@ create view revenue0 (supplier_no, total_revenue) as
 	from
 		lineitem
 	where
-	 to_date(l_shipdate,'yyyy-mm-dd') >= date '1996-01-01'
-		and to_date(l_shipdate,'yyyy-mm-dd') < date '1996-01-01' + interval '3' month
+	 to_date(l_shipdate,'yyyy-mm-dd') >= date '1997-01-01'
+		and to_date(l_shipdate,'yyyy-mm-dd') < date '1997-01-01' + interval '3' month
 	group by
 		l_suppkey

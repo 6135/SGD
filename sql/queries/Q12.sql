@@ -17,11 +17,11 @@ from
 	lineitem
 where
 	o_orderkey = l_orderkey
-	and l_shipmode in ('MAIL', 'SHIP')
+	and l_shipmode in ('RAIL', 'FOB')
 	and to_date(l_commitdate,'yyyy-mm-dd') < to_date(l_receiptdate,'yyyy-mm-dd')
 	and to_date(l_shipdate,'yyyy-mm-dd') < to_date(l_commitdate,'yyyy-mm-dd')
-	and to_date(l_receiptdate,'yyyy-mm-dd') >= date '1994-01-01'
-	and to_date(l_receiptdate,'yyyy-mm-dd') < date '1994-01-01' + interval '1' year
+	and to_date(l_receiptdate,'yyyy-mm-dd') >= date '1997-01-01'
+	and to_date(l_receiptdate,'yyyy-mm-dd') < date '1997-01-01' + interval '1' year
 group by
 	l_shipmode
 order by

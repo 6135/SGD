@@ -24,8 +24,8 @@ from
 			and s_nationkey = n1.n_nationkey
 			and c_nationkey = n2.n_nationkey
 			and (
-				(n1.n_name = 'FRANCE' and n2.n_name = 'GERMANY')
-				or (n1.n_name = 'GERMANY' and n2.n_name = 'FRANCE')
+				(n1.n_name = 'JAPAN' and n2.n_name = 'INDIA')
+				or (n1.n_name = 'INDIA' and n2.n_name = 'JAPAN')
 			)
 			and to_date(l_shipdate,'yyyy-mm-dd') between to_date('1995-01-01','yyyy-mm-dd') and to_date('1996-12-31','yyyy-mm-dd')
 	)

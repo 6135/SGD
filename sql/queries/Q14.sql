@@ -9,5 +9,5 @@ from
 	part
 where
 	l_partkey = p_partkey
-	and to_date(l_shipdate,'yyyy-mm-dd') >= date '1995-09-01'
-	and to_date(l_shipdate,'yyyy-mm-dd') < date '1995-09-01' + interval '1' month
+	and to_date(l_shipdate,'yyyy-mm-dd') >= date '1996-12-01'
+	and to_date(l_shipdate,'yyyy-mm-dd') < date '1996-12-01' + interval '1' month

@@ -1,5 +1,0 @@
-Observation,Filename,With Keys,Execution Time
-1,drop_tables.sql,False,0.0019621849060058594
-1,drop_tables.sql,False,0.05499982833862305
-1,create_ext_tables.sql,False,0.01699972152709961
-1,load.sql,False,85.9304428100586

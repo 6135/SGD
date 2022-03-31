@@ -15,8 +15,8 @@ from
 where
 	c_custkey = o_custkey
 	and l_orderkey = o_orderkey
-	and to_date(o_orderdate,'yyyy-mm-dd') >= date '1993-10-01'
-	and to_date(o_orderdate,'yyyy-mm-dd') < date '1993-10-01' + interval '3' month
+	and to_date(o_orderdate,'yyyy-mm-dd') >= date '1993-08-01'
+	and to_date(o_orderdate,'yyyy-mm-dd') < date '1993-08-01' + interval '3' month
 	and l_returnflag = 'R'
 	and c_nationkey = n_nationkey
 group by
