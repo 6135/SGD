@@ -25,8 +25,9 @@ def execute(params, query):
                 initial = time()
                 t.start()
                 cursor.execute(query)
-                # print(cursor.fetchone())
+
                 final = time() - initial
+                print(cursor.fetchall())
 
         return final
 
@@ -107,7 +108,7 @@ def run_tests(n, filename):
             print(f'Executed query {query} (with keys)...')
 
 def main():
-    # execute(config(),str(open(f"sql/queries/Q{sys.argv[3]}.sql").read()))
+    # print(execute(config(),str(open(f"sql/queries/Q{sys.argv[3]}.sql").read())))
     # execute(config(), open('sql/create_tables.sql').read())
     # execute(config(),open('sql/queries/Q1.sql', 'r').read())
     if len(sys.argv) == 3:

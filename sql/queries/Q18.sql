@@ -1,4 +1,4 @@
-select
+select * from (select
 	c_name,
 	c_custkey,
 	o_orderkey,
@@ -30,4 +30,4 @@ group by
 order by
 	o_totalprice desc,
 	o_orderdate
-FETCH NEXT 100 ROWS ONLY
+) WHERE ROWNUM <= 100

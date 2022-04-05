@@ -1,4 +1,4 @@
-select
+select * from (select
 	c_custkey,
 	c_name,
 	sum(l_extendedprice * (1 - l_discount)) as revenue,
@@ -29,4 +29,4 @@ group by
 	c_comment
 order by
 	revenue desc
-FETCH NEXT 20 ROWS ONLY
+) where rownum <= 20

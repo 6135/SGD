@@ -10,12 +10,12 @@ select
 	avg(l_discount) as avg_disc,
 	count(*) as count_order
 from
-	lineitem
+ 	lineitem
 where
-	to_date(l_shipdate,'yyyy-mm-dd') <= to_date('1998-12-01','yyyy-mm-dd') - interval '108' day (3)
+	to_date(l_shipdate,'yyyy-mm-dd') <= date '1998-12-01' - interval '108' day
 group by
 	l_returnflag,
 	l_linestatus
 order by
 	l_returnflag,
-	l_linestatus
+	l_linestatus;

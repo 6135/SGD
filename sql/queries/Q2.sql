@@ -1,4 +1,4 @@
-select
+SELECT * from (select
 	s_acctbal,
 	s_name,
 	n_name,
@@ -22,22 +22,24 @@ where
 	and n_regionkey = r_regionkey
 	and r_name = 'ASIA'
 	and ps_supplycost = (
-		select
-			min(ps_supplycost)
-		from
-			partsupp,
-			supplier,
-			nation,
-			region
-		where
-			p_partkey = ps_partkey
-			and s_suppkey = ps_suppkey
-			and s_nationkey = n_nationkey
-			and n_regionkey = r_regionkey
-			and r_name = 'ASIA'
-	)
+	select
+		min(ps_supplycost)
+	from
+		partsupp,
+		supplier,
+		nation,
+		region
+	where
+		p_partkey = ps_partkey
+		and s_suppkey = ps_suppkey
+		and s_nationkey = n_nationkey
+		and n_regionkey = r_regionkey
+		and r_name = 'ASIA'
+		FETCH NEXT 100 ROW ONLY
+	)  
 order by
 	s_acctbal desc,
 	n_name,
 	s_name,
-	p_partkey FETCH NEXT 100 ROWS ONLY
+	p_partkey 
+)

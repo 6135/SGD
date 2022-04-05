@@ -1,4 +1,4 @@
-select
+select * from (select
 	s_name,
 	count(*) as numwait
 from
@@ -37,4 +37,4 @@ group by
 order by
 	numwait desc,
 	s_name
-FETCH NEXT 100 ROWS ONLY
+) WHERE ROWNUM <= 100
