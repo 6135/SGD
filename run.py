@@ -27,7 +27,7 @@ def execute(params, query):
                 cursor.execute(query)
 
                 final = time() - initial
-                print(cursor.fetchall())
+                print(cursor.fetchone())
 
         return final
 
