@@ -12,7 +12,7 @@ select
 from
  	lineitem
 where
-	to_date(l_shipdate,'yyyy-mm-dd') <= date '1998-12-01' - interval '108' day
+	to_date(l_shipdate,'yyyy-mm-dd') <= date '1998-12-01' - interval '90' day (3)
 group by
 	l_returnflag,
 	l_linestatus
