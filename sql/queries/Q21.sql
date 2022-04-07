@@ -1,4 +1,4 @@
-select * from (select
+select
 	s_name,
 	count(*) as numwait
 from
@@ -32,9 +32,9 @@ where
 	)
 	and s_nationkey = n_nationkey
 	and n_name = 'EGYPT'
+	and ROWNUM <= 100
 group by
 	s_name
 order by
 	numwait desc,
 	s_name
-) WHERE ROWNUM <= 100
