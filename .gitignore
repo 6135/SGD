@@ -1,3 +1,2 @@
-sql\data\*
-database.ini
-*.tbl
+
+Labs/lab7_delayedflights/DelayedFlights.csv
